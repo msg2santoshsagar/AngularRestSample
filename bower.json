@@ -1,0 +1,25 @@
+{
+  "name": "AngularSample",
+  "appPath": "src/main/webapp",
+  "authors": [
+    "santosh sagar <msg2santoshsagar@gmail.com>"
+  ],
+  "description": "Angular Sample Project with spring for own practice",
+  "main": "",
+  "license": "",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.6.4",
+    "angular-bootstrap": "^2.5.0",
+    "angular-ui-router": "^0.4.2",
+    "ngstorage": "^0.3.11"
+  }
+}

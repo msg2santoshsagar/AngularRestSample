@@ -1,0 +1,28 @@
+{
+  "name": "angular_sample_app",
+  "version": "1.0.0",
+  "description": "Angular Sample For Own Practice",
+  "main": "index.html",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msg2santoshsagar/AngularRestSample.git"
+  },
+  "keywords": [
+    "Angular",
+    "Sample"
+  ],
+  "author": "Santosh Sagar <msg2santoshsagar@gmail.com>",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/msg2santoshsagar/AngularRestSample/issues"
+  },
+  "homepage": "https://github.com/msg2santoshsagar/AngularRestSample#readme",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "browser-sync": "^2.18.8"
+  }
+}
