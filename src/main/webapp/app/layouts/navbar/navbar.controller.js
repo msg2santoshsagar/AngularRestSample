@@ -1,15 +1,22 @@
 (function() {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('angularSampleApp')
-        .controller('NavbarController', NavbarController);
+	angular
+	.module('angularSampleApp')
+	.controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state'];
+	NavbarController.$inject = ['$state','LoginService'];
 
-    function NavbarController ($state) {
-        var vm = this;
-        console.log("Nav Bar Controller Created.");
+	function NavbarController ($state,LoginService) {
+		var vm = this;
+		vm.login=login;
 
-    }
+		function login(){
+			LoginService.open();
+		}
+
+
+
+
+	}
 })();

@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+.link-block a {
+	cursor: pointer;
+	padding: 5px;
+	font-size: 20px;
+	background-color: lightgreen;
+	border-radius: 5px;
+	text-align: center;
+}
