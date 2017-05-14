@@ -15,18 +15,39 @@ var config 				= 	require('./config');
 
 module.exports = {
 		dev: devInject,
-		js :jsInject
+		devMin: devMinInject,
+		js :jsInject,
+		minJs:minJs
 }
 
 function devInject() {
 	return gulp.src(config.app + 'index.html')
-	.pipe(inject(gulp.src(config.app + 'app/**/*.js')
+	.pipe(inject(gulp.src([config.appJs+'**/*.js','!'+config.appJs+'app.cc.js'])
 			.pipe(print())
 			.pipe(plumber({errorHandler: handleErrors}))
 			.pipe(naturalSort())
 			.pipe(angularFilesort()), {relative: true}))
 			.pipe(gulp.dest(config.app));
 }
+
+function minJs() {
+	return gulp.src(config.app + 'index.html')
+	.pipe(inject(gulp.src([config.appJs+'**/*min.js','!'+config.appJs+'app.cc.js'])
+			.pipe(print())
+			.pipe(plumber({errorHandler: handleErrors}))
+			.pipe(naturalSort())
+			.pipe(angularFilesort()), {relative: true}))
+			.pipe(gulp.dest(config.app));
+}
+
+function devMinInject() {
+	return gulp.src(config.app + 'index.html')
+	.pipe(print())
+	.pipe(inject(gulp.src(config.appJs+'app.cc.js')
+			.pipe(plumber({errorHandler: handleErrors})), {relative: true}))
+			.pipe(gulp.dest(config.app));
+}
+
 
 function jsInject() {
 	return gulp.src(config.app + 'content/assets/fileNames.html')

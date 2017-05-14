@@ -1,3 +1,5 @@
 /target/
 /.settings/
 /node_modules/
+/src/main/webapp/app/**/*min.js
+/src/main/webapp/app/app.cc.js
