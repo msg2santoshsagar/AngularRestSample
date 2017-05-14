@@ -1,0 +1,39 @@
+'use strict';
+
+var gulp 				= 	require('gulp');
+var plumber 			= 	require('gulp-plumber');
+var inject 				= 	require('gulp-inject');
+var es 					= 	require('event-stream');
+var naturalSort 		= 	require('gulp-natural-sort');
+var angularFilesort 	= 	require('gulp-angular-filesort');
+var bowerFiles 			= 	require('main-bower-files');
+var rename				=	require("gulp-rename");	
+var print 				= 	require('gulp-print');   
+var handleErrors 		= 	require('./handle-errors');
+var config 				= 	require('./config');
+
+
+module.exports = {
+		dev: devInject,
+		js :jsInject
+}
+
+function devInject() {
+	return gulp.src(config.app + 'index.html')
+	.pipe(inject(gulp.src(config.app + 'app/**/*.js')
+			.pipe(print())
+			.pipe(plumber({errorHandler: handleErrors}))
+			.pipe(naturalSort())
+			.pipe(angularFilesort()), {relative: true}))
+			.pipe(gulp.dest(config.app));
+}
+
+function jsInject() {
+	return gulp.src(config.app + 'content/assets/fileNames.html')
+	.pipe(inject(gulp.src(config.app + 'app/**/*.js')
+			.pipe(print())
+			.pipe(plumber({errorHandler: handleErrors}))
+			.pipe(naturalSort())
+			.pipe(angularFilesort()), {ignorePath: 'src/main/webapp',addRootSlash:false,starttag:"<!-- inject:appJs -->",endtag:"<!-- endinject:appJs -->"}))
+			.pipe(gulp.dest(config.app+ 'content/assets/'));
+}
