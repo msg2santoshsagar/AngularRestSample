@@ -8,8 +8,10 @@
 	ThumbnailGeneratorTestController.$inject = ['$rootScope','SelectFileService','ThumbnailGenerator'];
 
 	function ThumbnailGeneratorTestController ($rootScope,SelectFileService,ThumbnailGenerator) {
-		var vm 				=  this;
-		var SELECTION_TYPE 	=  "image/*";
+		var vm 						=  	this;
+		var SELECTION_TYPE 			=  	"image/*";
+		var THUMBNAIL_HEIGHT_WIDTH 	= 	300;
+		var ENCODING_OPTION_FACTOR  =   0.8;
 
 		vm.imageList 		= 	[];
 		vm.file      		=	{};
@@ -36,11 +38,26 @@
 								var image = new Image();
 
 								image.onload = function(){
-									var thumbnailSrc = ThumbnailGenerator.generateThumbnail(image,0.25);
+
+									var scalingFactor = 0.25;
+
+									if(image.height > image.width){
+										scalingFactor = THUMBNAIL_HEIGHT_WIDTH / image.height ;
+									}else{
+										scalingFactor = THUMBNAIL_HEIGHT_WIDTH / image.width ;
+									}
+									var opts ={
+											scaling  		:  scalingFactor,
+											encodingOption  :  ENCODING_OPTION_FACTOR
+									};
+
+									console.log("THUMBNAIL  GENERATOR OPTIONS ",index," :: ",opts);
+
+									var thumbnailSrc = ThumbnailGenerator.generateThumbnail(image,opts);
 									vm.imageList[index].thumbnailSrc = thumbnailSrc;
 									console.log("thumbnail Setting Done ",index);
 									if(index < len-1){
-										setThumbnailData(index++);
+										setThumbnailData(++index);
 									}
 								}
 
