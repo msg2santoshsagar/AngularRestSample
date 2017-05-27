@@ -8,3 +8,8 @@
 	border-radius: 5px;
 	text-align: center;
 }
+
+.block-image-fixed{
+	height : 500px;
+	width  : 500px;
+}

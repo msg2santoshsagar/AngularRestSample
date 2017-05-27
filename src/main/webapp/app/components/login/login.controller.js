@@ -5,9 +5,9 @@
         .module('angularSampleApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', '$uibModalInstance','Auth'];
 
-    function LoginController ($rootScope, $state, $timeout, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, $uibModalInstance,Auth) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -35,7 +35,7 @@
         function login (event) {
         	console.log("Login Request");
            // event.preventDefault();
-           /* Auth.login({
+            Auth.login({
                 username: vm.username,
                 password: vm.password,
                 rememberMe: vm.rememberMe
@@ -58,7 +58,7 @@
                 }
             }).catch(function () {
                 vm.authenticationError = true;
-            });*/
+            });
         }
 
         function register () {

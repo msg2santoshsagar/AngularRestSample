@@ -50,7 +50,7 @@ gulp.task('minBuild', function(){
 });
 
 gulp.task('devBuild', function(){
-	return runSequence('inject:dev');
+	return runSequence('deleteMinFiles','inject:dev');
 });
 
 
