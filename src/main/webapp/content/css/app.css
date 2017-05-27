@@ -10,7 +10,8 @@
 }
 
 .block-image-fixed{
-	height : 250px;
-	width  : 250px;
-	border: 1px red solid;
+	height 	: 250px;
+	width  	: 250px;
+	border	: 1px red solid;
+	padding : 0px;
 }
