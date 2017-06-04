@@ -26,9 +26,11 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4 block-image-fixed"
-			ng-repeat="image in vm.imageList">
-			<img ng-src="{{image.thumbnailSrc}}" />
+		<div class="col-md-4" ng-repeat="image in vm.imageList">
+			<div class="block-image-fixed">
+				<img ng-src="{{image.thumbnailSrc}}" />
+			</div>
+
 		</div>
 	</div>
 

@@ -21,6 +21,10 @@
 			console.log("Image List :: ",vm.imageList);
 		} 
 
+		function setThumbnailAtIndex(data,index){
+			vm.imageList[index].thumbnailSrc = data;
+		}
+
 		vm.selectFiles = function(isMultiple){
 
 			SelectFileService.selectFile(SELECTION_TYPE,isMultiple).then(
@@ -54,7 +58,7 @@
 									console.log("THUMBNAIL  GENERATOR OPTIONS ",index," :: ",opts);
 
 									var thumbnailSrc = ThumbnailGenerator.generateThumbnail(image,opts);
-									vm.imageList[index].thumbnailSrc = thumbnailSrc;
+									setThumbnailAtIndex(thumbnailSrc,index);
 									console.log("thumbnail Setting Done ",index);
 									if(index < len-1){
 										setThumbnailData(++index);
