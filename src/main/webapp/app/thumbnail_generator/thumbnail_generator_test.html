@@ -10,15 +10,26 @@
 			<input type="text" ng-disabled="true" ng-model="vm.file.fileName"
 				class="form-control" />
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<button ng-click="vm.selectFiles(false);" class="btn btn-primary">UPLOAD
 				SINGLE FILE</button>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<button ng-click="vm.selectFiles(true);" class="btn btn-primary">UPLOAD
 				MULTIPLE FILE</button>
 		</div>
+		<div class="col-md-2">
+			<button ng-click="vm.uploadData()" class="btn btn-primary">UPLOAD
+				DATA</button>
+		</div>
 	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<button ng-click="vm.FetchImageData()" class="btn btn-primary">Fetch Image Data</button>
+		</div>
+	</div>
+
 
 	<div class="row">
 		<div class="col-md-12">
@@ -26,9 +37,9 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4" ng-repeat="image in vm.imageList">
+		<div class="col-md-4" ng-repeat="image in vm.fetchedImageData">
 			<div class="block-image-fixed">
-				<img ng-src="{{image.thumbnailSrc}}" />
+				<img ng-src="{{vm.createUri(image.id)}}" />
 			</div>
 
 		</div>

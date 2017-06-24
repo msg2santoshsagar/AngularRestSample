@@ -5,11 +5,12 @@
 	.module('angularSampleApp')
 	.controller('ThumbnailGeneratorTestController', ThumbnailGeneratorTestController);
 
-	ThumbnailGeneratorTestController.$inject = ['$rootScope','SelectFileService','ThumbnailGenerator'];
+	ThumbnailGeneratorTestController.$inject = ['$rootScope','SelectFileService','ThumbnailGenerator','$http'];
 
-	function ThumbnailGeneratorTestController ($rootScope,SelectFileService,ThumbnailGenerator) {
+	function ThumbnailGeneratorTestController ($rootScope,SelectFileService,ThumbnailGenerator,$http) {
 		var vm 						=  	this;
-		var SELECTION_TYPE 			=  	"image/*";
+		//var SELECTION_TYPE 			=  	"image/*";
+		var SELECTION_TYPE 			=  	null;
 		var THUMBNAIL_HEIGHT_WIDTH 	= 	300;
 		var ENCODING_OPTION_FACTOR  =   0.8;
 
@@ -40,6 +41,19 @@
 								console.log("Set Image THumbnail ",index);
 								var currentImageData = vm.imageList[index] ;
 								var image = new Image();
+								
+								if(! currentImageData.type.startsWith("image") ){
+									if(index < len-1){
+										var reader = new FileReader();
+										reader.onload=function(e){
+											vm.imageList[index].src = e.target.result;
+											setThumbnailData(++index);
+										}
+										reader.readAsDataURL(currentImageData);
+									}else{
+										return;
+									}
+								}
 
 								image.onload = function(){
 
@@ -77,6 +91,36 @@
 
 		}
 
-
+		
+		
+		vm.uploadData=function(){
+			console.log("Image List Data ",vm.imageList);
+			$http.post("api/uploadFile",vm.imageList).then(
+					function(res){
+						console.log("Success --  ",res.data);
+					},function(errRes){
+						console.log("Failuere --- ",errRes);
+					}
+			)
+		}
+		
+		vm.fetchedImageData = [];
+		vm.FetchImageData = function(){
+			$http.post("api/getFileList").then(
+					function(res){
+						console.log("Success --  ",res.data);
+						vm.fetchedImageData = res.data;
+					},function(errRes){
+						console.log("Failuere --- ",errRes);
+					}
+			)
+		}
+		
+		
+		vm.createUri=function(fileName){
+			return "http://localhost:8080/api/getFileData?fileName="+fileName;
+		}
+		
+		
 	}
 })();
